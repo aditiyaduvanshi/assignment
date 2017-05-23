@@ -1,0 +1,34 @@
+{
+  "name": "assign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha **/*.test.js",
+    "start": "node server.js",
+    "test-watch": "nodemon --exec 'npm test'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "presets": [
+      "env"
+    ],
+    "babel-cli": "^6.24.1",
+    "babel-preset-node6": "^11.0.0",
+    "body-parser": "^1.17.1",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.26",
+    "query-parser": "0.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-node6": "^11.0.0",
+    "expect": "^1.20.2",
+    "i": "^0.3.5",
+    "mocha": "^3.0.0",
+    "node-mocks-http": "^1.6.2",
+    "supertest": "^2.0.0"
+  }
+}

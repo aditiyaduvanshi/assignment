@@ -1,0 +1,347 @@
+<html lang="en">
+
+<head>
+  <title>games</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- Contact Form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="js/freelancer.js"></script>
+  <script src="js/jquery.bootcomplete.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <link rel="stylesheet" href="awesomplete.css" />
+  <script src="awesomplete.js" async></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/mycss.css" />
+  <style type="text/css">
+  body{
+    background-image: url("http://www.bhmpics.com/wallpapers/indias_captain_mahendra_singh_dhoni-1920x1080.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  .row{
+    background-color: rgba(12, 10, 10, 0.52) !important;
+  }
+  .btn{
+    position:relative;
+    left:-51.99em;
+    top:6.2;
+    z-index: 1;
+    width: -2em;
+  }
+
+  .formi{
+    position: absolute;
+    top: 1.40em;
+    left: 50em;
+  }
+  #year,#wol,#fil{
+				padding:5px 15px;
+				background:#44C1A9;
+				border:0 none;
+				cursor:pointer;
+				margin:50 -10 10 60;
+				color:white;
+				font-weight:bold;
+				font-size:15px;
+				font-family:'Play', sans-serif;
+
+			}
+
+  </style>
+  <script type="text/javascript">
+    var d = 1;
+    var temp;
+  </script>
+</head>
+
+<body>
+
+  <div id="rem">
+  <div class="container div1">
+    <form method="get">
+      <div class="input-group">
+        <input type="text" style="margin-top:-15%; position:relative;right:-30%;width:190%;margin-right:none" class="form-control awesomplete" id="msg" list="mylist" placeholder="Search">
+        <datalist id="mylist">
+      	<option>Chennai Super Kings</option>
+      	<option>Kings XI Punjab</option>
+      	<option>Delhi Daredevils</option>
+      	<option>Rajasthan Royals</option>
+      	<option>Deccan Chargers</option>
+      	<option>Mumbai Indians</option>
+      	<option>Royal Challengers Bangalore</option>
+        <option>Rising Pune Supergiants</option>
+        <option>Gujarat Lions</option>
+        <option>Pune Warriors</option>
+        </datalist>
+        <span class="input-group-btn">
+        <button style="" class="btn" type="button" onclick="getdata(1)">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="container-filter">
+    <div class="filter-options">
+      <form class="formi" name="filter-form" id="form">
+        <select type="dropdown" name="year" id="year">
+
+					<option value="">Year</option>
+					<option value='2008'>2008</option>
+					<option value='2009'>2009</option>
+					<option value='2010'>2010</option>
+          <option value='2011'>2011</option>
+					<option value='2012'>2012</option>
+					<option value='2013'>2013</option>
+          <option value='2014'>2014</option>
+					<option value='2015'>2015</option>
+					<option value='2016'>2016</option>
+					</select>
+
+        <select type="dropdown" name="wol" id="wol">
+
+					<option value="">Win/Loss</option>
+					<option value='win'>Win</option>
+					<option value='loss'>Loss</option>
+
+					</select>
+
+        <button type="button" id="fil" name="button" onclick="filter()">Filter</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+  <div class="container div3" id="para">
+
+  </div>
+
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" style="">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
+  <script type="text/javascript">
+    const searchBar = document.getElementById("msg");
+    searchBar.addEventListener('keypress', (event) => {
+      getdata(1)
+    });
+    var index1;
+    var index;
+    function getdata(index) {
+      var index1 = index;
+      var name1 = searchBar.value;
+      //alert(d);
+      var data = null;
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function() {
+        if (this.readyState === 4) {
+
+          doci = this.responseText;
+          //alert(doci);
+          docs = JSON.parse(doci);
+          temp = docs;
+          //console.log(docs[0].team1);
+
+          showcards(docs, index1);
+
+
+
+          //document.getElementById("para").innerHTML = this.responseText;
+        }
+      });
+
+      function showcards(docs, index){
+        //alert("I'm in here!!");
+        //alert(docs);
+        //alert(d);
+        var index1 = index;
+        var inn = "<div class='row'>";
+
+        for (var i = 0; i < docs.length; i++) {
+
+          inn += '<a href="#"><div class="col-sm-3 div2 polaroid box" id='+ docs[i].id+' onClick="reply_click(this.id,1)"><p id="head"><b>' + docs[i].team1 + " VS " + docs[i].team2 + "</b></p>" +
+            "<table>" +
+            "<tr>" +
+            "<td><b>Winner</b></td>" +
+            "<td>" + docs[i].winner + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td><b>Venue</b></td>" +
+            "<td>" + docs[i].venue + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "<td><b>Season</b></td>" +
+            "<td>" + docs[i].season + "</td>" +
+            "</tr>" +
+            "</table>" +
+            "</div>"+ "</a>";
+        }
+        inn += '</div>';
+
+        inn += '<div class="pagination pgn">';
+
+
+        index1=index1+1;
+        index2=index1-2;
+        inn += '<button type="button" onClick="getdata('+index2+')">PREV</button>'
+        inn += '<button style="position:relative;left:45em;" type="button" onClick="getdata( '+index1 +')">NEXT</button>'
+    
+        inn += '</div>'
+
+        document.getElementById("para").innerHTML = inn;
+
+      }
+
+      xhr.open("get", "http://localhost:3000/auto?name=" + name1+"&data="+index1);
+      xhr.setRequestHeader("cache-control", "no-cache");
+
+      xhr.send(data);
+    }
+  </script>
+
+  <script type="text/javascript" src="js/show_cards.js">
+
+
+
+  </script>
+
+  <script>
+  // Get the modal
+
+
+
+
+  function reply_click(clicked_id, index){
+
+    var modal = document.getElementById('myModal');
+    var remove = document.getElementById('rem');
+    // Get the button that opens the modal
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    //alert(clicked_id);
+    var c_id = clicked_id;
+    var index1 = index;
+    var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+          if (this.readyState === 4) {
+
+            doci = this.responseText;
+            //alert(doci);
+            docs = JSON.parse(doci);
+            var inn = "<div class='row'>";
+
+            for (var i = 1; i < docs.length; i++) {
+              //alert(docs[i].over)
+              inn += '<a href="#"><div class="col-sm-3 div2 polaroid box"><p id="head"></p>' +
+                "<table>" +
+                "<tr>" +
+                "<td><b>Batting</b></td>" +
+                "<td>" + docs[i].batting_team + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><b>Bowling</b></td>" +
+                "<td>" + docs[i].bowling_team + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><b>Over</b></td>" +
+                "<td>" + docs[i].over + "</td>" +
+                "</tr>" +
+                "</table>" +
+                "</div>"+ "</a>";
+            }
+            inn += '</div>';
+
+            // inn += '<div class="container div1 text-center"><ul class="pagination pagination pagination-lg">'
+            //
+            // for (var x = 1; x <= 10; x++) {
+            //
+            //   inn += '<li><a href = "#">' + x + '</a></li>'
+            // }
+            // inn += '</ul></div>'
+
+            inn += '<div class="pagination">';
+
+
+            index1=index1+1;
+            index2=index1-2;
+            inn += '<button type="button" onClick="reply_click('+c_id+' ,'+index2+')">PREV</button>'
+            inn += '<button style="position:relative;left:45em;" type="button" onClick="reply_click('+c_id+', '+index1 +')">NEXT</button>'
+            //console.log(typeof index1,index1);
+            inn += '</div>'
+
+            document.getElementById("myModal").innerHTML = inn;
+
+            modal.style.display = "block";
+            remove.style.display = "none";
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function(event) {
+                  if (event.target == modal) {
+                      modal.style.display = "none";
+                      remove.style.display = "block";
+                  }
+              }
+
+          }
+  });
+
+  xhr.open("get", "http://localhost:3000/delivery?name=" + c_id+"&data="+index1);
+  xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send();
+
+
+
+
+  }
+
+
+
+  // When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+</script>
+</body>
+
+</html>
