@@ -12,7 +12,7 @@ let names = new Abc();
       const mongo = require('mongodb').MongoClient;
 console.log('hi')
   mongo.connect('mongodb://localhost:27017/ipl', (err, db) => {
-    //console.log('hi1')
+    console.log('hi1')
     if (err) {
       console.log('Unable to connect to server');
     }
