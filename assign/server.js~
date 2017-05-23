@@ -1,0 +1,43 @@
+
+const express = require('express');
+
+const query = require('query-parser');
+
+var app = express();
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', (req,res)=>{
+  res.send('index.html');
+
+});
+
+
+app.get('/auto', (req, res)=>{
+    var x=req.query.name;
+    //console.log(x);
+    const MongoClient = require('mongodb').MongoClient;
+
+  MongoClient.connect('mongodb://localhost:27017/ipl', (err, db) => {
+    if (err) {
+      console.log('Unable to connect to server');
+    }
+    console.log('Connected to server');
+
+    db.collection('matches').find({$or:[{"team1":{$regex : x + ".*"}},{"team2":{$regex : x + ".*"}}]}).toArray().then((docs) =>{
+
+      res.json(docs)
+
+      //console.log(JSON.stringify(docs,undefined,2));
+    },(err) =>{
+      console.log('Unable to fetch Todos',err);
+    })
+
+    //db.close();
+
+  });
+
+});
+
+
+app.listen(3006);
